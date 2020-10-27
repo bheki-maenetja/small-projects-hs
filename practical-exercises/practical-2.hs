@@ -33,9 +33,19 @@ isitprime n
     | length [i | i <- [1..n], n `mod` i == 0] == 2 = True
     | otherwise = False
 
--- Function to generate to test isitprime
-genPrimes::Int->[(Int, Bool)]
-genPrimes n = [(i, isitprime i) | i <- [1..n]]
+getFactors::(Int,Int,[Int])->[Int] -- helper function to get factors
+getFactors (n, i, fs)
+    | i == 1 = 1:fs
+    | n `mod` i == 0 = getFactors (n, (i-1), i:fs)
+    | otherwise = getFactors(n, (i-1), fs)
+
+new_isitprime::Int->Bool -- alternative solution
+new_isitprime n
+    | length (getFactors (n, n, [])) == 2 = True
+    | otherwise = False
+
+genPrimes::Int->[(Int, Bool)] -- helper function to generate to test isitprime
+genPrimes n = [(i, new_isitprime i) | i <- [1..n]]
 
 -- 4. Define a function comb :: Integer->Integer-> Integer which takes positive integers n and m. If n<m returns zero, and if n>= m returns the number of combinations of n objects taken m at a time: comb n m = n! / m! × (n − m)!
 comb::Int->Int->Int
@@ -44,8 +54,7 @@ comb n m
     | n >= m = fac n `div` (fac m * fac (n - m))
     | otherwise = 0
 
--- Helper function to calculate factorials
-fac::Int->Int
+fac::Int->Int -- helper function to calculate factorials
 fac n
     | n == 0 = 1
     | n > 0 = n * fac(n-1)
