@@ -24,3 +24,15 @@ drop2 xs
 -- 5. Write a function shuffle(including its signature) that takes as argument a non-empty list of Ints, removes the first element and appends it at the back
 shuffle::[Int]->[Int]
 shuffle xs = tail xs ++ take 1 xs
+
+-- 6. Consider a function safetail that behaves in the same way as tail, except that safetail maps the empty list to the empty list, whereas tail gives an error in this case. Define safetail (for a list of Ints) using: (a) a conditional expression, (b)guarded equations, (c) pattern matching
+safetail::[Int]->[Int]
+-- a)
+safetail xs = if length xs > 0 then tail xs else []
+-- b)
+safetail xs
+    | length xs > 0 = tail xs
+    |otherwise = []
+-- c)
+safetail (_:xs) = xs 
+safetail [] = []
