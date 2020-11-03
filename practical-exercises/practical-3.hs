@@ -32,7 +32,7 @@ safetail xs = if length xs > 0 then tail xs else []
 -- b)
 safetail xs
     | length xs > 0 = tail xs
-    |otherwise = []
+    | otherwise = []
 -- c)
 safetail (_:xs) = xs 
 safetail [] = []
