@@ -14,7 +14,6 @@ sumAlternatingSigns (x:xs)
 scalarproduct::[Int]->[Int]->Int
 scalarproduct xs ys = sum[ fst x * snd x | x <- zip xs ys]
 
-
 -- 4. A positive integer is perfect if it equals the sum of all its factors, excluding the number itself. Using a list comprehension, define a function that returns the list of all perfect numbers up to a given limit
 getFactors::(Int,Int,[Int])->[Int] -- helper function to get factors
 getFactors (n, i, fs)
