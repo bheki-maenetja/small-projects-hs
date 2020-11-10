@@ -21,6 +21,16 @@ drop2 xs
     | length xs >= 4 = drop 2 (reverse (drop 2 (reverse xs)))
     | otherwise = []
 
+dropAny::Int->[Int]->[Int] -- drop any number of values from both ends of the list
+dropAny n xs
+    | length xs >= 2 * n = drop n (reverse (drop n (reverse xs)))
+    | otherwise = xs
+
+getMiddle::[Int]->[Int] -- Gets the middle value(s) in a list
+getMiddle xs
+    | length xs `mod` 2 == 0 = dropAny ((length xs - 1) `div` 2) xs
+    | otherwise = dropAny ((length xs) `div` 2) xs
+
 -- 5. Write a function shuffle(including its signature) that takes as argument a non-empty list of Ints, removes the first element and appends it at the back
 shuffle::[Int]->[Int]
 shuffle xs = tail xs ++ take 1 xs
