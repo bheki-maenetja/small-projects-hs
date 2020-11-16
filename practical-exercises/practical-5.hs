@@ -16,7 +16,6 @@ merge (x:xs) (y:ys)
 -- 3. Define a recursive function msort that implements merge sort, which can be specified by the following two rules:
 -- (1) Lists of length smaller than or equal to 1 are already sorted;
 -- (2) Other lists can be sorted by sorting the two halves and merging the resulting list
-
 msort::[Int]->[Int]
 msort [] = []
 msort xs
