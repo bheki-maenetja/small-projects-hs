@@ -26,6 +26,4 @@ msort xs
 -- 4. Define a Int value n value which n number of function line which takes one positive and a Char value and returns a String can be displayed as a line consisting of that Char
 line::Int->Char->String
 line 0 _ = ""
-line i s
-    | i == 0 = ""
-    | otherwise = s:"" ++ line (i-1) s
+line i s = s:"" ++ line (i-1) s
