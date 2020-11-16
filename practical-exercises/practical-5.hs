@@ -22,3 +22,10 @@ msort [] = []
 msort xs
     | length xs == 2 = merge (take 1 xs) (drop 1 xs)
     | otherwise = merge (msort (take (length xs `div` 2) xs))  (msort (drop (length xs `div` 2) xs))
+
+-- 4. Define a Int value n value which n number of function line which takes one positive and a Char value and returns a String can be displayed as a line consisting of that Char
+line::Int->Char->String
+line 0 _ = ""
+line i s
+    | i == 0 = ""
+    | otherwise = s:"" ++ line (i-1) s
