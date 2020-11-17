@@ -18,9 +18,8 @@ merge (x:xs) (y:ys)
 -- (2) Other lists can be sorted by sorting the two halves and merging the resulting list
 msort::[Int]->[Int]
 msort [] = []
-msort xs
-    | length xs == 2 = merge (take 1 xs) (drop 1 xs)
-    | otherwise = merge (msort (take (length xs `div` 2) xs))  (msort (drop (length xs `div` 2) xs))
+msort [a] = [a]
+msort xs = merge (msort (take (length xs `div` 2) xs))  (msort (drop (length xs `div` 2) xs))
 
 -- 4. Define a Int value n value which n number of function line which takes one positive and a Char value and returns a String can be displayed as a line consisting of that Char
 line::Int->Char->String
