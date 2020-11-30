@@ -24,3 +24,7 @@ rdups (x:xs)
 -- 3. Define a polymorphic function which replaces the ith element of the list (starting from zero)
 replace::Int->a->[a]->[a]
 replace i x xs = take i xs ++ [x] ++ drop (i+1) xs
+
+-- 4. Define a polymorphic function slice which takes two indices, i and k, and a list, and returns the list containing the elements between the i'th and k'th element of the original list. Start counting the elements with 1
+slice::Int->Int->[a]->[a]
+slice i j xs = drop (i-1) (take j xs) 
