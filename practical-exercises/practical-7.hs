@@ -20,3 +20,7 @@ rdups (x:xs)
     | xs == [] = [x]
     | x == (head xs) = [] ++ rdups xs
     | otherwise = [x] ++ rdups xs
+
+-- 3. Define a polymorphic function which replaces the ith element of the list (starting from zero)
+replace::Int->a->[a]->[a]
+replace i x xs = take i xs ++ [x] ++ drop (i+1) xs
