@@ -18,3 +18,6 @@ makeFlag l n
     | l == n = ['*' | i <-[1..l]] ++ "\n" ++ makeFlag l (n-1)
     | n == 1 = [] ++ makeFlag l (n-1)
     | otherwise = [if i == 1 || i == l || i == 1+(l-n) || i == n then '*' else ' ' | i  <-[1..l]] ++ "\n" ++ makeFlag l (n-1)
+
+flagpattern::Int->Int->[Char] --  function flagpattern that takes two positive Int values n greater than or equal to 5, and m greater than or equal to 1, and returns a String that can be displayed as the following m 'flag' patterns of dimension n
+flagpattern n m = concat [makeFlag n n | i <-[1..m]]
