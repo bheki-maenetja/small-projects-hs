@@ -23,12 +23,6 @@ flagpattern::Int->Int->[Char] --  function flagpattern that takes two positive I
 flagpattern n m = concat [makeFlag n n | i <-[1..m]]
 
 -- Part 4
-getIndex::Eq a => [a]->a->Int->Int -- function that gets the index of the first occurence of an element in a list
-getIndex (x:xs) n i
-    | xs == [] = -1
-    | x == n = i
-    | otherwise = getIndex xs n (i+1)
-
 lengthCount::Eq a => [a]->a->Int->[Int]
 lengthCount (x:xs) n i
     | xs == [] && x == n && i == 0 = []
