@@ -21,3 +21,18 @@ makeFlag l n
 
 flagpattern::Int->Int->[Char] --  function flagpattern that takes two positive Int values n greater than or equal to 5, and m greater than or equal to 1, and returns a String that can be displayed as the following m 'flag' patterns of dimension n
 flagpattern n m = concat [makeFlag n n | i <-[1..m]]
+
+-- Part 4
+getIndex::Eq a => [a]->a->Int->Int -- function that gets the index of the first occurence of an element in a list
+getIndex (x:xs) n i
+    | xs == [] = -1
+    | x == n = i
+    | otherwise = getIndex xs n (i+1)
+
+lengthCount::Eq a => [a]->a->Int->[Int]
+lengthCount (x:xs) n i
+    | xs == [] && x == n && i == 0 = []
+    | xs == [] && x /= n = [i]
+    | x == n && i == 0 = [] ++ lengthCount xs n 0
+    | x == n = [i] ++ lengthCount xs n 0
+    | otherwise = lengthCount xs n (i+1)
