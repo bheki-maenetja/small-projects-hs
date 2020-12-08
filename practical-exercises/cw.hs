@@ -24,7 +24,11 @@ flagpattern n m = concat [makeFlag n n | i <-[1..m]]
 
 -- Part 4
 lengthCount::Eq a => [a]->a->Int->[Int] -- helper function that counts segments of a list
+lengthCount [] _ _ = []
 lengthCount (x:xs) n c
     | x /=n = lengthCount xs n (c+1)
     | length [i | i<-xs, i == n] == 0 = [c] ++ [length xs]
     | x == n = [c] ++ lengthCount xs n 0
+
+lsplit::Eq a => [a]->a->[Int]
+lsplit xs n = [i | i<-(lengthCount xs n 0), i /= 0]
