@@ -23,10 +23,8 @@ flagpattern::Int->Int->[Char] --  function flagpattern that takes two positive I
 flagpattern n m = concat [makeFlag n n | i <-[1..m]]
 
 -- Part 4
-lengthCount::Eq a => [a]->a->Int->[Int]
-lengthCount (x:xs) n i
-    | xs == [] && x == n && i == 0 = []
-    | xs == [] && x /= n = [i]
-    | x == n && i == 0 = [] ++ lengthCount xs n 0
-    | x == n = [i] ++ lengthCount xs n 0
-    | otherwise = lengthCount xs n (i+1)
+lengthCount::Eq a => [a]->a->Int->[Int] -- helper function that counts segments of a list
+lengthCount (x:xs) n c
+    | x /=n = lengthCount xs n (c+1)
+    | length [i | i<-xs, i == n] == 0 = [c] ++ [length xs]
+    | x == n = [c] ++ lengthCount xs n 0
