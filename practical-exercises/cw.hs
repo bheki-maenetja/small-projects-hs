@@ -25,14 +25,21 @@ flagpattern n m = concat [makeFlag n n | i <-[1..m]]
 -- Part 3 --
 getUniqueCharacters::[Char]->[Char]->([Char],[Char]) -- helper function that gets unique characters for each string
 getUniqueCharacters firstWord secondWord
-    | otherwise = ([i | i<-firstWord, not (elem i secondWord) || i == ' '], [i | i<-secondWord, not (elem i firstWord) || i == ' '])
+    | otherwise = ([i | i<-firstWord, not (elem i secondWord) && not (i == ' ')], [i | i<-secondWord, not (elem i firstWord) && not (i == ' ')])
 
-getlphi::Int->[Char]
-getlphi strLen
-    | strLen == 0 = "is indifferent to"
-    | strLen == 1 = "loves"
-    | strLen == 2 = "has physical desires for"
-    | strLen == 3 = "hates"
+getlphi::[Char]->[Char]
+getlphi str
+    | strLen == 0 = " is indifferent to "
+    | strLen == 1 = " loves "
+    | strLen == 2 = " has physical desires for "
+    | strLen == 3 = " hates "
+    where
+        strLen = (length str `mod` 4)
+
+compatability::[Char]->[Char]->[Char]
+compatability firstName secondName = firstName ++ getlphi (fst wordTup) ++ secondName ++ " and " ++ secondName ++ getlphi (snd wordTup) ++ firstName
+    where
+        wordTup = getUniqueCharacters firstName secondName
 
 -- Part 4 --
 lengthCount::Eq a => [a]->a->Int->[Int] -- helper function that counts segments of a list
