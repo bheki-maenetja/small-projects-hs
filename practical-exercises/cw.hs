@@ -23,11 +23,18 @@ flagpattern::Int->Int->[Char] --  function flagpattern that takes two positive I
 flagpattern n m = concat [makeFlag n n | i <-[1..m]]
 
 -- Part 3 --
-getUniqueCharacters::[Char]->[Char]->([Char],[Char]) -- helper function that gets unique characters for each string
-getUniqueCharacters firstWord secondWord
-    | otherwise = ([i | i<-firstWord, not (elem i secondWord) && not (i == ' ')], [i | i<-secondWord, not (elem i firstWord) && not (i == ' ')])
+removeElement::Eq a => a->[a]->[a] -- helper function to remove the first occurence on an element in a list
+removeElement e xs
+    | not (elem e xs) = xs
+    | otherwise = takeWhile (/= e) xs ++ tail (dropWhile (/= e) xs)
 
-getlphi::[Char]->[Char]
+eliminateCharacters::[Char]->[Char]->[Char]->([Char], [Char]) -- helper function to repeatedly cross out like characters
+eliminateCharacters a [] b = (a, b)
+eliminateCharacters firstWord (y:ys) xs
+    | elem y firstWord || y == ' ' = eliminateCharacters (removeElement y firstWord) ys xs
+    | otherwise = eliminateCharacters (removeElement y firstWord) ys (xs ++ [y])
+
+getlphi::[Char]->[Char] -- helper function to get the correct word
 getlphi str
     | strLen == 0 = " is indifferent to "
     | strLen == 1 = " loves "
@@ -39,7 +46,7 @@ getlphi str
 compatability::[Char]->[Char]->[Char]
 compatability firstName secondName = firstName ++ getlphi (fst wordTup) ++ secondName ++ " and " ++ secondName ++ getlphi (snd wordTup) ++ firstName
     where
-        wordTup = getUniqueCharacters firstName secondName
+        wordTup = eliminateCharacters firstName secondName ""
 
 -- Part 4 --
 lengthCount::Eq a => [a]->a->Int->[Int] -- helper function that counts segments of a list
