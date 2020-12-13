@@ -1,6 +1,6 @@
 -- 20COA108 FUNCTIONAL PROGRAMMING COURSEWORK ASSIGNMENT
 
--- Part 2
+-- Part 2 --
 -- a)
 makeStep::Int->Int->[Char] -- function that returns a string of length l r number of times
 makeStep 0 0 = ""
@@ -22,7 +22,19 @@ makeFlag l n
 flagpattern::Int->Int->[Char] --  function flagpattern that takes two positive Int values n greater than or equal to 5, and m greater than or equal to 1, and returns a String that can be displayed as the following m 'flag' patterns of dimension n
 flagpattern n m = concat [makeFlag n n | i <-[1..m]]
 
--- Part 4
+-- Part 3 --
+getUniqueCharacters::[Char]->[Char]->([Char],[Char]) -- helper function that gets unique characters for each string
+getUniqueCharacters firstWord secondWord
+    | otherwise = ([i | i<-firstWord, not (elem i secondWord) || i == ' '], [i | i<-secondWord, not (elem i firstWord) || i == ' '])
+
+getlphi::Int->[Char]
+getlphi strLen
+    | strLen == 0 = "is indifferent to"
+    | strLen == 1 = "loves"
+    | strLen == 2 = "has physical desires for"
+    | strLen == 3 = "hates"
+
+-- Part 4 --
 lengthCount::Eq a => [a]->a->Int->[Int] -- helper function that counts segments of a list
 lengthCount [] _ _ = []
 lengthCount (x:xs) n c
