@@ -1,5 +1,20 @@
 -- 20COA108 FUNCTIONAL PROGRAMMING COURSEWORK ASSIGNMENT
 
+---- Part 1 ----
+{-
+a)	Among the many benefits of functional programming, 
+    there are three that stand out in particular: the elimination of side effects, improved readability and easier testing
+
+    Side effects –  functional programming eliminates a phenomenon known as 
+                    side effects – the unwanted tampering of global variables by a function call. 
+                    Given the fact that functional programming requires the inputs and outputs for 
+                    all functions to be clearly defined, it is nigh on impossible for a function to 
+                    mistakenly change or modify a variable that is not defined within the scope of 
+                    that function. This is a very handy feature for programmers as it enables them 
+                    to easily keep track of all variables within their program. 
+
+-}
+
 ---- Part 2 ----
 -- a)
 makeStep::Int->Int->[Char] -- function that returns a string of length l r number of times
