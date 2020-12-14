@@ -97,6 +97,17 @@ makeFlag l n
     | otherwise = [if i == 1 || i == l || i == 1+(l-n) || i == n then '*' else ' ' | i  <-[1..l]] ++ "\n" ++ makeFlag l (n-1)
 
 ---- Part 3 ----
+compatibility::[Char]->[Char]->[Char]
+{-
+This function will take two strings reprenting two people's names and output
+a sentence that indicates their compatability. The compatability is determined
+through a process of eliminating the characters that the strings have in common
+and the comparing the lengths of the resultant strings.
+-}
+compatibility firstName secondName = firstName ++ getlphi (fst wordTup) ++ secondName ++ " and " ++ secondName ++ getlphi (snd wordTup) ++ firstName
+    where
+        wordTup = eliminateCharacters firstName secondName ""
+
 removeElement::Eq a => a->[a]->[a] 
 {-
 This helper function takes two parameters a value and a list, and removes the first occurence 
@@ -116,7 +127,11 @@ eliminateCharacters firstWord (y:ys) xs
     | elem y firstWord || y == ' ' = eliminateCharacters (removeElement y firstWord) ys xs
     | otherwise = eliminateCharacters (removeElement y firstWord) ys (xs ++ [y])
 
-getlphi::[Char]->[Char] -- helper function to get the correct word
+getlphi::[Char]->[Char] 
+{-
+This helper function will return a specific string according to the length 
+of its input string
+-}
 getlphi str
     | strLen == 0 = " is indifferent to "
     | strLen == 1 = " loves "
@@ -125,16 +140,18 @@ getlphi str
     where
         strLen = (length str `mod` 4)
 
-compatibility::[Char]->[Char]->[Char]
-compatibility firstName secondName = firstName ++ getlphi (fst wordTup) ++ secondName ++ " and " ++ secondName ++ getlphi (snd wordTup) ++ firstName
-    where
-        wordTup = eliminateCharacters firstName secondName ""
-
 ---- Part 4 ----
-splitList::Eq a => a->[a]->[[a]]->[[a]] -- helper function that splits a list in segements
+lsplit::Eq a => [a]->a->[Int]
+{-
+This function will return a list of the lengths of the non-empty segments of a list
+that has been split at a given value
+-}
+lsplit xs n = [length i | i<-splitList n xs [], i /= []]
+
+splitList::Eq a => a->[a]->[[a]]->[[a]] 
+{- 
+This helper function will split a list into segments at a given value 
+-}
 splitList n xs ys
     | not (elem n xs) = ys ++ [takeWhile (/= n) xs]
     | otherwise = splitList n (tail (dropWhile (/= n) xs)) (ys ++ [takeWhile (/= n) xs])
-
-lsplit::Eq a => [a]->a->[Int]
-lsplit xs n = [length i | i<-splitList n xs [], i /= []]
