@@ -2,17 +2,59 @@
 
 ---- Part 1 ----
 {-
-a)	Among the many benefits of functional programming, 
-    there are three that stand out in particular: the elimination of side effects, improved readability and easier testing
+a)	Among the many benefits of functional programming, there are three that 
+    stand out in particular: the elimination of side effects, improved readability and easier testing
 
-    Side effects –  functional programming eliminates a phenomenon known as 
-                    side effects – the unwanted tampering of global variables by a function call. 
-                    Given the fact that functional programming requires the inputs and outputs for 
-                    all functions to be clearly defined, it is nigh on impossible for a function to 
-                    mistakenly change or modify a variable that is not defined within the scope of 
-                    that function. This is a very handy feature for programmers as it enables them 
-                    to easily keep track of all variables within their program. 
+    Elimination of Side effects –-- functional programming eliminates a phenomenon known as 
+                                    side effects – the unwanted tampering of global variables by a function call. 
+                                    Given the fact that functional programming requires the inputs and outputs for 
+                                    all functions to be clearly defined, it is nigh on impossible for a function to 
+                                    mistakenly change or modify a variable that is not defined within the scope of 
+                                    that function. This is a very handy feature for programmers as it enables them 
+                                    to easily keep track of all variables within their program.
 
+    Improved Readability –- in the functional programming paradigm the readability of a program is greatly increased. 
+                            Given that each function in the program is pure – that is to say that its outputs are solely 
+                            dependent on its inputs – programs written in the functional paradigm are easier to reason 
+                            about and therefore easier for programmers to understand. Each function can be treated as a 
+                            distinct unit and its functionality can be understood without having to look at any other 
+                            part of the program.
+    
+    Easy Testing –- following on from the point about readability, programs written in the functional paradigm are 
+                    also easier to test and debug. This is because, as mentioned before, every function can be 
+                    treated as a distinct unit that doesn’t rely on any other part of the program. Test data can 
+                    be fed to each unit and the output can be compared to a set of expected outputs.
+
+b)  A mathematical function can be thought of as a relation between two sets of values that maps each individual 
+    element of one set to a single element in the other. In simpler terms it is a mapping of an independent 
+    variable to a dependent one. Haskell functions bare a few passing resemblances to mathematical functions. 
+    They both take in clearly defined inputs. They are both defined over a given set of valid inputs 
+    (they have a domain) and produce a particular set of valid outputs (they have a range). Additionally, for both 
+    function types the output is solely dependent on the input. The behaviour of many mathematical functions can 
+    be replicated in the Haskell programming language. However, whereas any given mathematical function deals with 
+    values of a particular type, Haskell functions can be ‘polymorphic’ and work on a multitude of data types. In 
+    that sense, Haskell functions ‘expand’ on the capabilities of mathematical functions.
+
+c) A higher-order function is a function that either takes one or more functions as its arguments or returns a function 
+as its output. Typical uses of higher-order functions include applying a function to all the elements of a data 
+structure (map), filtering elements from a data structure and mathematical integration. Another common use of higher-order 
+functions is the sorting of elements in a data structure such as a list. 
+
+For example, let’s say we wanted a function that could sort a list of names in any way we wanted to (alphabetical order, 
+reverse alphabetical order, word length, number of vowels etc.). How would we do that? We could define a function sortList 
+that takes two arguments: a list of names and a binary function (thus making sortList a higher-order function). The binary 
+function would be any function that compares two words by a given criteria and returns a Boolean value indicating whether or 
+not the first word meets the criteria more so or less so than the second word. We could then iterate over the list of names 
+two names at a time and feed each pair of names into this binary function. If the binary function returns a certain bool 
+value (e.g. True) then we would switch the places of the two names in the list otherwise we just carry on. Once the iteration 
+is complete a list of names, sorted according to a pre-defined criterion, will be returned.
+
+REFERENCES
+    * Freydenberger, D., 2020. Logic For Computer Science (Lecture Notes). Loughborough University, pp.10-87.
+    * Moutafis, R., 2020. Why Developers Are Falling In Love With Functional Programming. 
+    [online] Medium. Available at: <https://towardsdatascience.com/why-developers-are-falling-in-love-with-functional-programming-13514df4048e> 
+    [Accessed 14 December 2020].
+    * Thompson, S., 2015. Haskell: The Craft Of Functional Programming. 3rd ed. Harlow (England): Addison-Wesley.
 -}
 
 ---- Part 2 ----
