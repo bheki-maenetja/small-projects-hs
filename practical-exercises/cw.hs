@@ -1,6 +1,6 @@
 -- 20COA108 FUNCTIONAL PROGRAMMING COURSEWORK ASSIGNMENT
 
--- Part 2 --
+---- Part 2 ----
 -- a)
 makeStep::Int->Int->[Char] -- function that returns a string of length l r number of times
 makeStep 0 0 = ""
@@ -22,7 +22,7 @@ makeFlag l n
 flagpattern::Int->Int->[Char] --  function flagpattern that takes two positive Int values n greater than or equal to 5, and m greater than or equal to 1, and returns a String that can be displayed as the following m 'flag' patterns of dimension n
 flagpattern n m = concat [makeFlag n n | i <-[1..m]]
 
--- Part 3 --
+---- Part 3 ----
 removeElement::Eq a => a->[a]->[a] -- helper function to remove the first occurence on an element in a list
 removeElement e xs
     | not (elem e xs) = xs
@@ -43,18 +43,16 @@ getlphi str
     where
         strLen = (length str `mod` 4)
 
-compatability::[Char]->[Char]->[Char]
-compatability firstName secondName = firstName ++ getlphi (fst wordTup) ++ secondName ++ " and " ++ secondName ++ getlphi (snd wordTup) ++ firstName
+compatibility::[Char]->[Char]->[Char]
+compatibility firstName secondName = firstName ++ getlphi (fst wordTup) ++ secondName ++ " and " ++ secondName ++ getlphi (snd wordTup) ++ firstName
     where
         wordTup = eliminateCharacters firstName secondName ""
 
--- Part 4 --
-lengthCount::Eq a => [a]->a->Int->[Int] -- helper function that counts segments of a list
-lengthCount [] _ _ = []
-lengthCount (x:xs) n c
-    | x /=n = lengthCount xs n (c+1)
-    | length [i | i<-xs, i == n] == 0 = [c] ++ [length xs]
-    | x == n = [c] ++ lengthCount xs n 0
+---- Part 4 ----
+splitList::Eq a => a->[a]->[[a]]->[[a]] -- helper function that splits a list in segements
+splitList n xs ys
+    | not (elem n xs) = ys ++ [takeWhile (/= n) xs]
+    | otherwise = splitList n (tail (dropWhile (/= n) xs)) (ys ++ [takeWhile (/= n) xs])
 
 lsplit::Eq a => [a]->a->[Int]
-lsplit xs n = [i | i<-(lengthCount xs n 0), i /= 0]
+lsplit xs n = [length i | i<-splitList n xs [], i /= []]
